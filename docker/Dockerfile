@@ -30,3 +30,5 @@ WORKDIR /root/alumni-computacao-ufcg
 RUN \
   mvn dependency:sources
 
+CMD "./mvnw spring-boot:run -X > log.out 2> log.err"
+
