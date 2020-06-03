@@ -2,7 +2,7 @@ package br.edu.ufcg.computacao.alumni.constants;
 
 public class Messages {
     public static class Exception {
-        public static final String NEITHER_BODY_NOR_HEADER_CAN_BE_NULL = "Neither body nor header can be null.";
+        public static final String OPERATION_FAILED_S = "Operation failed: HTTP code [%d].";
     }
 
     public static class Fatal {
@@ -12,7 +12,6 @@ public class Messages {
     }
 
     public static class Info {
-        public static final String RESETTING_CODE_S = "Resetting code: [%s].";
         public static final String HTTP_RESPONSE = "HTTP response code [%s].";
     }
 

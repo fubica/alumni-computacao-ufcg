@@ -1,13 +1,15 @@
 package br.edu.ufcg.computacao.alumni.core.holders;
 
+import br.edu.ufcg.computacao.alumni.api.http.response.AccessToken;
+
 public class AccessTokenHolder {
     private static AccessTokenHolder instance;
     private static String state;
-    private static String code;
+    private static AccessToken accessToken;
 
     private AccessTokenHolder() {
         this.state = "";
-        this.code = "";
+        this.accessToken = new AccessToken(null, "0");
     }
 
     public static synchronized AccessTokenHolder getInstance() {
@@ -25,11 +27,11 @@ public class AccessTokenHolder {
         AccessTokenHolder.state = state;
     }
 
-    public static String getCode() {
-        return code;
+    public static AccessToken getAccessToken() {
+        return accessToken;
     }
 
-    public static void setCode(String code) {
-        AccessTokenHolder.code = code;
+    public static void setAccessToken(AccessToken newAccessToken) {
+        accessToken = newAccessToken;
     }
 }

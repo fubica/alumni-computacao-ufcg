@@ -14,6 +14,10 @@ public class ApiDocumentation {
                 "    \"name1\",\n" +
                 "    \"name2\"\n" +
                 "  ]\n";
+        public static final String ACCESS_TOKEN = "{\n" +
+                "    \"access_token\": \"<access_token>\",\n" +
+                "    \"expires_in\": <expiration_interval>\n" +
+                "}";
     }
 
     public static class Authentication {

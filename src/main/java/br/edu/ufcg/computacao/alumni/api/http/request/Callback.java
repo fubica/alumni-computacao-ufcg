@@ -1,12 +1,15 @@
 package br.edu.ufcg.computacao.alumni.api.http.request;
 
+import br.edu.ufcg.computacao.alumni.api.http.response.AccessToken;
 import br.edu.ufcg.computacao.alumni.constants.*;
 import br.edu.ufcg.computacao.alumni.core.holders.AccessTokenHolder;
 import br.edu.ufcg.computacao.alumni.core.holders.PropertiesHolder;
 import br.edu.ufcg.computacao.alumni.core.util.HttpRequestClient;
 import br.edu.ufcg.computacao.alumni.core.util.HttpResponse;
+import com.google.gson.Gson;
 import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,20 +46,14 @@ public class Callback {
             Map<String, String> body = new HashMap<>();
             HttpResponse response = HttpRequestClient.doGenericRequest(HttpMethod.GET, endpoint, headers, body);
             LOGGER.info(String.format(Messages.Info.HTTP_RESPONSE, String.format("%d", response.getHttpCode())));
-//            Set<String> keys = response.getHeaders().keySet();
-//            int i = 0;
-//            while (keys.iterator().hasNext()) {
-//                String key = keys.iterator().next();
-//                List<String> values = response.getHeaders().get(key);
-//                LOGGER.info(String.format("Header[%d]=%s:%s", i++, key, values.toString()));
-//                keys.iterator().remove();
-//            }
             LOGGER.info(String.format("Content:[%s]", response.getContent()));
-            LOGGER.info(String.format(Messages.Info.RESETTING_CODE_S, code));
-            currentToken.setCode(code);
-        } else {
-            LOGGER.error(String.format(Messages.Error.INVALID_STATE_S_S, currentToken.getState(), state));
+            String token = new Gson().fromJson("access_token", String.class);
+            String expiresIn = new Gson().fromJson("expires_in", String.class);
+            LOGGER.info(String.format("Token:[%s]", token));
+            LOGGER.info(String.format("ExpiresIn:[%s]", expiresIn));
+            AccessToken accessToken = new AccessToken(token, expiresIn);
+            currentToken.setAccessToken(accessToken);
         }
-        return null;
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
