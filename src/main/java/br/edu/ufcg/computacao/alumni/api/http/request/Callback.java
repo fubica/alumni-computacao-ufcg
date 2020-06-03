@@ -43,14 +43,14 @@ public class Callback {
             Map<String, String> body = new HashMap<>();
             HttpResponse response = HttpRequestClient.doGenericRequest(HttpMethod.GET, endpoint, headers, body);
             LOGGER.info(String.format(Messages.Info.HTTP_RESPONSE, String.format("%d", response.getHttpCode())));
-            Set<String> keys = response.getHeaders().keySet();
-            int i = 0;
-            while (keys.iterator().hasNext()) {
-                String key = keys.iterator().next();
-                List<String> values = response.getHeaders().get(key);
-                LOGGER.info(String.format("Header[%d]=%s:%s", i++, key, values.toString()));
-                keys.iterator().remove();
-            }
+//            Set<String> keys = response.getHeaders().keySet();
+//            int i = 0;
+//            while (keys.iterator().hasNext()) {
+//                String key = keys.iterator().next();
+//                List<String> values = response.getHeaders().get(key);
+//                LOGGER.info(String.format("Header[%d]=%s:%s", i++, key, values.toString()));
+//                keys.iterator().remove();
+//            }
             LOGGER.info(String.format("Content:[%s]", response.getContent()));
             LOGGER.info(String.format(Messages.Info.RESETTING_CODE_S, code));
             currentToken.setCode(code);
