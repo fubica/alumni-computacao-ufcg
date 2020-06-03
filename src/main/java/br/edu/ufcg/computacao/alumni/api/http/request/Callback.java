@@ -49,7 +49,9 @@ public class Callback {
                 String key = keys.iterator().next();
                 List<String> values = response.getHeaders().get(key);
                 LOGGER.info(String.format("Header[%d]=%s:%s", i++, key, values.toString()));
+                keys.iterator().remove();
             }
+            LOGGER.info(String.format("Content:[%s]", response.getContent()));
             LOGGER.info(String.format(Messages.Info.RESETTING_CODE_S, code));
             currentToken.setCode(code);
         } else {
