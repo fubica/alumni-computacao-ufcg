@@ -37,8 +37,8 @@ public class Authentication {
         LOGGER.info("GET authenticate");
         String clientId = this.properties.getProperty(ConfigurationPropertyKeys.CLIENT_ID);
         String callbackURI = this.properties.getProperty(ConfigurationPropertyKeys.CALLBACK_URI);
+        String state = this.properties.getProperty(ConfigurationPropertyKeys.STATE);
         String cmdFormat = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=%s&redirect_uri=%s&state=%s&scope=r_liteprofile%sr_emailaddress%sw_member_social";
-        String state = "4567hhgaksskkskskskskAAAA";
         AccessTokenPair.getInstance().setState(state);
         String endpoint = String.format(cmdFormat, callbackURI, clientId, state, "%20", "%20");
         LOGGER.info(String.format("Executing command [%s].", endpoint));
