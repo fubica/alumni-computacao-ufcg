@@ -6,7 +6,7 @@ import br.edu.ufcg.computacao.alumni.core.holders.AccessTokenHolder;
 import br.edu.ufcg.computacao.alumni.core.holders.PropertiesHolder;
 import br.edu.ufcg.computacao.alumni.core.util.HttpRequestClient;
 import br.edu.ufcg.computacao.alumni.core.util.HttpResponse;
-import com.google.gson.Gson;
+import org.json.JSONObject;
 import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -47,8 +47,10 @@ public class Callback {
             HttpResponse response = HttpRequestClient.doGenericRequest(HttpMethod.GET, endpoint, headers, body);
             LOGGER.info(String.format(Messages.Info.HTTP_RESPONSE, String.format("%d", response.getHttpCode())));
             LOGGER.info(String.format("Content:[%s]", response.getContent()));
-            String token = new Gson().fromJson("access_token", String.class);
-            String expiresIn = new Gson().fromJson("expires_in", String.class);
+
+            JSONObject obj = new JSONObject(response.getContent());
+            String token = obj.getString("access_token");
+            String expiresIn = obj.getString("expires_in");
             LOGGER.info(String.format("Token:[%s]", token));
             LOGGER.info(String.format("ExpiresIn:[%s]", expiresIn));
             AccessToken accessToken = new AccessToken(token, expiresIn);
