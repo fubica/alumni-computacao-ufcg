@@ -16,6 +16,12 @@ public class ApiDocumentation {
                 "  ]\n";
     }
 
+    public static class Authentication {
+        public static final String API = "Requests an access token.";
+        public static final String REQUEST_ACCESS_TOKEN = "Issues a request for an access token for the application.";
+        public static final String RECEIVE_ACCESS_TOKEN = "Callback function to receive the access token.";
+    }
+
     public static class Alumni {
         public static final String API = "Queries the names of the alumni.";
         public static final String DESCRIPTION = "Lists the names of the alumni.";

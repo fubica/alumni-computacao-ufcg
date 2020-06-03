@@ -1,6 +1,5 @@
 package br.edu.ufcg.computacao.alumni.core.service;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.Properties;
 import br.edu.ufcg.computacao.alumni.Alumni;
 import br.edu.ufcg.computacao.alumni.constants.ConfigurationPropertyKeys;
 import br.edu.ufcg.computacao.alumni.constants.Messages;
-import br.edu.ufcg.computacao.alumni.constants.SystemConstants;
+import br.edu.ufcg.computacao.alumni.core.holders.PropertiesHolder;
 import org.apache.log4j.Logger;
 
 public class WhiteList implements Alumni {
@@ -35,7 +34,7 @@ public class WhiteList implements Alumni {
     private List<String> readMembers() {
         List<String> membersList = new ArrayList<>();
         try {
-            Properties properties = readProperties(SystemConstants.CONF_FILE_PATH);
+            Properties properties = PropertiesHolder.getInstance().getProperties();
             String membersListStr = properties.getProperty(ConfigurationPropertyKeys.MEMBERS_LIST_KEY);
             for (String member : membersListStr.split(SEPARATOR)) {
                 member = member.trim();
@@ -47,26 +46,10 @@ public class WhiteList implements Alumni {
         } catch (IOException e) {
             LOGGER.error(Messages.Error.ERROR_READING_CONFIGURATION_FILE);
             e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(Messages.Error.ERROR_READING_CONFIGURATION_FILE);
+            e.printStackTrace();
         }
         return membersList;
-    }
-
-    public static Properties readProperties(String fileName) throws IOException {
-        Properties prop = new Properties();
-        FileInputStream fileInputStream = null;
-
-        try {
-            fileInputStream = new FileInputStream(fileName);
-            prop.load(fileInputStream);
-        } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    LOGGER.error(String.format(Messages.Error.UNABLE_TO_CLOSE_FILE_S, fileName), e);
-                }
-            }
-        }
-        return prop;
     }
 }
