@@ -1,7 +1,7 @@
 package br.edu.ufcg.computacao.alumni.api.http.request;
 
 import br.edu.ufcg.computacao.alumni.constants.*;
-import br.edu.ufcg.computacao.alumni.core.holders.AccessTokenPair;
+import br.edu.ufcg.computacao.alumni.core.holders.AccessTokenHolder;
 import br.edu.ufcg.computacao.alumni.core.holders.PropertiesHolder;
 import br.edu.ufcg.computacao.alumni.core.util.HttpRequestClient;
 import br.edu.ufcg.computacao.alumni.core.util.HttpResponse;
@@ -29,8 +29,8 @@ public class Callback {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Void> callback(@RequestParam("code") String code, @RequestParam("state") String state) throws IOException {
-        LOGGER.info(String.format("POST callback: code [%s], state [%s].", code, state));
-        AccessTokenPair currentToken = AccessTokenPair.getInstance();
+        LOGGER.info(String.format("GET callback: code [%s], state [%s].", code, state));
+        AccessTokenHolder currentToken = AccessTokenHolder.getInstance();
         if (currentToken.getState().equals(state)) {
             String clientId = this.properties.getProperty(ConfigurationPropertyKeys.CLIENT_ID);
             String clientSecret = this.properties.getProperty(ConfigurationPropertyKeys.CLIENT_SECRET);

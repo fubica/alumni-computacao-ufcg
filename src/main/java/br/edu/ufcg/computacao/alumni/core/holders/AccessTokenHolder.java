@@ -1,18 +1,18 @@
 package br.edu.ufcg.computacao.alumni.core.holders;
 
-public class AccessTokenPair {
-    private static AccessTokenPair instance;
+public class AccessTokenHolder {
+    private static AccessTokenHolder instance;
     private static String state;
     private static String code;
 
-    private AccessTokenPair() {
+    private AccessTokenHolder() {
         this.state = "";
         this.code = "";
     }
 
-    public static synchronized AccessTokenPair getInstance() {
+    public static synchronized AccessTokenHolder getInstance() {
         if (instance == null) {
-            instance = new AccessTokenPair();
+            instance = new AccessTokenHolder();
         }
         return instance;
     }
@@ -22,7 +22,7 @@ public class AccessTokenPair {
     }
 
     public static void setState(String state) {
-        AccessTokenPair.state = state;
+        AccessTokenHolder.state = state;
     }
 
     public static String getCode() {
@@ -30,6 +30,6 @@ public class AccessTokenPair {
     }
 
     public static void setCode(String code) {
-        AccessTokenPair.code = code;
+        AccessTokenHolder.code = code;
     }
 }
