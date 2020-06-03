@@ -12,7 +12,8 @@ public class Messages {
     }
 
     public static class Info {
-        public static final String RESSETING_CODE_S = "Resetting code: [%s].";
+        public static final String RESETTING_CODE_S = "Resetting code: [%s].";
+        public static final String HTTP_RESPONSE = "HTTP response code [%s].";
     }
 
     public static class Error {
