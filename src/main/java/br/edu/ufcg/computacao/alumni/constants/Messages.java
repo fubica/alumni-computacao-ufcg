@@ -21,6 +21,6 @@ public class Messages {
         public static final String INTERNAL_SERVER_ERROR = "Internal server error.";
         public static final String UNABLE_TO_CLOSE_FILE_S = "Unable to close file [%s].";
         public static final String ERROR_READING_CONFIGURATION_FILE = "Error reading configuration file";
-        public static final String INVALID_STATE_S = "Invalid state: [%s].";
+        public static final String INVALID_STATE_S_S = "Invalid state: [%s]!=[%s].";
     }
 }

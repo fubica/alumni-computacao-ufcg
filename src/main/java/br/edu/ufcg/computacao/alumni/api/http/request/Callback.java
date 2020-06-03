@@ -53,7 +53,7 @@ public class Callback {
             LOGGER.info(String.format(Messages.Info.RESETTING_CODE_S, code));
             currentToken.setCode(code);
         } else {
-            LOGGER.error(String.format(Messages.Error.INVALID_STATE_S, state));
+            LOGGER.error(String.format(Messages.Error.INVALID_STATE_S_S, currentToken.getState(), state));
         }
         return null;
     }
