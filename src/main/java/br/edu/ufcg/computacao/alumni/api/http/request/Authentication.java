@@ -42,11 +42,11 @@ public class Authentication {
         String cmdFormat = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=%s&redirect_uri=%s&state=%s&scope=r_liteprofile%sr_emailaddress%sw_member_social";
         AccessTokenHolder.getInstance().setState(state);
         String endpoint = String.format(cmdFormat, clientId, callbackURI, state, "%20", "%20");
-//        LOGGER.info(String.format("Executing command [%s].", endpoint));
-//        Map<String, String> headers = new HashMap<>();
-//        Map<String, String> body = new HashMap<>();
-//        HttpResponse response = HttpRequestClient.doGenericRequest(HttpMethod.GET, endpoint, headers, body);
-//        LOGGER.info(String.format(Messages.Info.HTTP_RESPONSE, String.format("%d", response.getHttpCode())));
+        LOGGER.info(String.format("Executing command [%s].", endpoint));
+        Map<String, String> headers = new HashMap<>();
+        Map<String, String> body = new HashMap<>();
+        HttpResponse response = HttpRequestClient.doGenericRequest(HttpMethod.GET, endpoint, headers, body);
+        LOGGER.info(String.format(Messages.Info.HTTP_RESPONSE, String.format("%d", response.getHttpCode())));
         return new ResponseEntity<>(endpoint, HttpStatus.OK);
     }
 }
