@@ -50,9 +50,9 @@ public class Callback {
 
             JSONObject obj = new JSONObject(response.getContent());
             String token = obj.getString("access_token");
-            String expiresIn = obj.getString("expires_in");
+            long expiresIn = obj.getLong("expires_in");
             LOGGER.info(String.format("Token:[%s]", token));
-            LOGGER.info(String.format("ExpiresIn:[%s]", expiresIn));
+            LOGGER.info(String.format("ExpiresIn:[%d]", expiresIn));
             AccessToken accessToken = new AccessToken(token, expiresIn);
             currentToken.setAccessToken(accessToken);
         }

@@ -9,7 +9,7 @@ public class AccessTokenHolder {
 
     private AccessTokenHolder() {
         this.state = "";
-        this.accessToken = new AccessToken(null, "0");
+        this.accessToken = new AccessToken(null, 0);
     }
 
     public static synchronized AccessTokenHolder getInstance() {

@@ -8,9 +8,9 @@ public class AccessToken {
     private String token;
     private long expiresIn;
 
-    public AccessToken(String token, String expiresIn) {
+    public AccessToken(String token, long expiresIn) {
         this.token = token;
-        this.expiresIn = Long.parseLong(expiresIn);
+        this.expiresIn = expiresIn;
     }
 
     public String getToken() {
