@@ -11,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -41,9 +39,17 @@ public class Callback {
             String endpoint = String.format(cmdFormat, code, callbackURI, clientId, clientSecret);
             LOGGER.info(String.format("Executing command [%s].", endpoint));
             Map<String, String> headers = new HashMap<>();
+            headers.put("Content-Type", "x-www-form-urlencoded");
             Map<String, String> body = new HashMap<>();
             HttpResponse response = HttpRequestClient.doGenericRequest(HttpMethod.GET, endpoint, headers, body);
             LOGGER.info(String.format(Messages.Info.HTTP_RESPONSE, String.format("%d", response.getHttpCode())));
+            Set<String> keys = response.getHeaders().keySet();
+            int i = 0;
+            while (keys.iterator().hasNext()) {
+                String key = keys.iterator().next();
+                List<String> values = response.getHeaders().get(key);
+                LOGGER.info(String.format("Header[%d]=%s:%s", i++, key, values.toString()));
+            }
             LOGGER.info(String.format(Messages.Info.RESETTING_CODE_S, code));
             currentToken.setCode(code);
         } else {
