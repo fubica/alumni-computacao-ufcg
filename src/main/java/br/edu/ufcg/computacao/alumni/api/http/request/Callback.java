@@ -29,7 +29,7 @@ public class Callback {
         this.properties = PropertiesHolder.getInstance().getProperties();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Void> callback(@RequestParam("code") String code, @RequestParam("state") String state) throws IOException {
         LOGGER.info(String.format("POST callback: code [%s], state [%s].", code, state));
         AccessTokenPair currentToken = AccessTokenPair.getInstance();
