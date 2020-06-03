@@ -41,7 +41,7 @@ public class Authentication {
         String state = UUID.randomUUID().toString();
         String cmdFormat = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=%s&redirect_uri=%s&state=%s&scope=r_liteprofile%sr_emailaddress%sw_member_social";
         AccessTokenHolder.getInstance().setState(state);
-        String endpoint = String.format(cmdFormat, callbackURI, clientId, state, "%20", "%20");
+        String endpoint = String.format(cmdFormat, clientId, callbackURI, state, "%20", "%20");
 //        LOGGER.info(String.format("Executing command [%s].", endpoint));
 //        Map<String, String> headers = new HashMap<>();
 //        Map<String, String> body = new HashMap<>();
