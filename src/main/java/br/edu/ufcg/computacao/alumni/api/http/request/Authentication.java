@@ -23,7 +23,7 @@ import java.util.UUID;
 @RequestMapping(value = Authentication.ENDPOINT)
 @Api(description = ApiDocumentation.Authentication.API)
 public class Authentication {
-    protected static final String ENDPOINT = SystemConstants.SERVICE_BASE_ENDPOINT + "authenticate";
+    protected static final String ENDPOINT = SystemConstants.SERVICE_BASE_ENDPOINT + "authentication";
 
     private static final Logger LOGGER = Logger.getLogger(Authentication.class);
     private Properties properties;
@@ -33,20 +33,28 @@ public class Authentication {
     }
 
     @ApiOperation(value = ApiDocumentation.Authentication.REQUEST_ACCESS_TOKEN)
-    @GetMapping
-    public ResponseEntity<String> authenticate() throws IOException {
-        LOGGER.info("GET authenticate");
+    @GetMapping(value = "/uri")
+    public ResponseEntity<String> uri() throws IOException {
+        LOGGER.info("GET URI");
         String clientId = this.properties.getProperty(ConfigurationPropertyKeys.CLIENT_ID);
         String callbackURI = this.properties.getProperty(ConfigurationPropertyKeys.CALLBACK_URI);
         String state = UUID.randomUUID().toString();
         String cmdFormat = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=%s&redirect_uri=%s&state=%s&scope=r_liteprofile%sr_emailaddress%sw_member_social";
         AccessTokenHolder.getInstance().setState(state);
         String endpoint = String.format(cmdFormat, clientId, callbackURI, state, "%20", "%20");
-        LOGGER.info(String.format("Executing command [%s].", endpoint));
-        Map<String, String> headers = new HashMap<>();
-        Map<String, String> body = new HashMap<>();
-        HttpResponse response = HttpRequestClient.doGenericRequest(HttpMethod.GET, endpoint, headers, body);
-        LOGGER.info(String.format(Messages.Info.HTTP_RESPONSE, String.format("%d", response.getHttpCode())));
+        //LOGGER.info(String.format("Executing command [%s].", endpoint));
+        //Map<String, String> headers = new HashMap<>();
+        //Map<String, String> body = new HashMap<>();
+        //HttpResponse response = HttpRequestClient.doGenericRequest(HttpMethod.GET, endpoint, headers, body);
+        //LOGGER.info(String.format(Messages.Info.HTTP_RESPONSE, String.format("%d", response.getHttpCode())));
         return new ResponseEntity<>(endpoint, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = ApiDocumentation.Authentication.REQUEST_ACCESS_TOKEN)
+    @GetMapping(value = "/token")
+    public ResponseEntity<String> token() throws IOException {
+        LOGGER.info("GET token");
+        String token = AccessTokenHolder.getInstance().getAccessToken().getToken();
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }
