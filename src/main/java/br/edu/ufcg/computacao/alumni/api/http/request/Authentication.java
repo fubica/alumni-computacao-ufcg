@@ -39,7 +39,7 @@ public class Authentication {
         String clientId = this.properties.getProperty(ConfigurationPropertyKeys.CLIENT_ID);
         String callbackURI = this.properties.getProperty(ConfigurationPropertyKeys.CALLBACK_URI);
         String state = UUID.randomUUID().toString();
-        String cmdFormat = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=%s&redirect_uri=%s&state=%s&scope=w_member_social";
+        String cmdFormat = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=%s&redirect_uri=%s&state=%s&scope=rw_groups";
         AccessTokenHolder.getInstance().setState(state);
         String endpoint = String.format(cmdFormat, clientId, callbackURI, state, "%20", "%20");
         //LOGGER.info(String.format("Executing command [%s].", endpoint));
