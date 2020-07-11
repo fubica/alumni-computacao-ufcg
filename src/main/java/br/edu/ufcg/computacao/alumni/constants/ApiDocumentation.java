@@ -10,29 +10,29 @@ public class ApiDocumentation {
     }
 
     public static class Model {
-        public static final String MEMBERS_LIST = "[\n" +
-                "    \"name1\",\n" +
-                "    \"name2\"\n" +
+        public static final String ALUMNI = "[\n" +
+                "    \"alumnus1\",\n" +
+                "    \"alumnus2\"\n" +
                 "  ]\n";
-        public static final String ACCESS_TOKEN = "{\n" +
-                "    \"access_token\": \"<access_token>\",\n" +
-                "    \"expires_in\": <expiration_interval>\n" +
-                "}";
-    }
-
-    public static class Authentication {
-        public static final String API = "Requests an access token.";
-        public static final String REQUEST_ACCESS_TOKEN = "Issues a request for an access token for the application.";
-        public static final String RECEIVE_ACCESS_TOKEN = "Callback function to receive the access token.";
+        public static final String ALUMNUS_NAME = "John Smith";
+        public static final String CURRENT_JOB = "John Smith & Sons";
+        public static final String START_YEAR = "2000";
     }
 
     public static class Alumni {
-        public static final String API = "Queries the names of the alumni.";
-        public static final String DESCRIPTION = "Lists the names of the alumni.";
+        public static final String API = "Queries information about the alumni.";
+        public static final String DESCRIPTION = "Lists information about the alumni.";
+        public static final String GET_NAMES_OPERATION = "Lists the names of the alumni.";
+        public static final String GET_CURRENT_JOB_OPERATION = "Lists names and current position of alumni.";
+        public static final String RELOAD_OPERATION = "Reloads alumni from input file.";
     }
 
     public static class Version {
         public static final String API = "Queries the version of the service's API.";
         public static final String GET_OPERATION = "Returns the version of the service's API.";
+    }
+
+    public class Token {
+        public static final String AUTHENTICATION_TOKEN = "Authentication token.";
     }
 }
